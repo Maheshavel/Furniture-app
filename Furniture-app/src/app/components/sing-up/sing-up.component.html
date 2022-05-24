@@ -1,0 +1,30 @@
+<div class="body">
+    <h2 class="text-center">Sign up</h2>
+    <br/>
+    <form #f="ngForm" (ngSubmit)="signup(f)">
+        <input ngModel name="name" #name="ngModel" type="text" class="form-control" placeholder="Name" required/>
+        <div class="alert alert-danger" *ngIf="name.invalid && name.touched">Name is required</div>
+        <br/>
+        <input ngModel name="email" #email="ngModel" type="text" class="form-control" placeholder="Email" required email/>
+        <div class="alert alert-danger" *ngIf="email.errors?.required && email.touched">Email is required</div>
+        <div class="alert alert-danger" *ngIf="email.errors?.email && email.touched">Email format is not correct</div>
+        <br/>
+        <input ngModel name="password" #password="ngModel" type="password" class="form-control" placeholder="Password" required minlength="6"/>
+        <div class="alert alert-danger" *ngIf="password.errors?.required && password.touched">Password is required</div>
+        <div class="alert alert-danger" *ngIf="password.errors?.minlength && password.touched">Password should be more than 6 characters or equal one</div>
+        <br/>
+        <input ngModel name="confirm" #confirm="ngModel" type="password" class="form-control" placeholder="Confirm password" required minlength="6"/>
+        <div class="alert alert-danger" *ngIf="confirm.errors?.required && confirm.touched">Confirm password is required</div>
+        <div class="alert alert-danger" *ngIf="password.value !== confirm.value && confirm.touched">Passwords are not identical</div>
+        <br/>
+        <input ngModel name="address" #address="ngModel" type="text" class="form-control" placeholder="Address" required/>
+        <div class="alert alert-danger" *ngIf="address.invalid && address.touched">Address is required</div>
+        <!--<label class="form-check-label" style="margin: 4ex">
+            <input ngModel name="isAdmin" #isAdmin="ngModel" type="checkbox" class="form-check-input"/>
+            User is admin
+        </label>-->
+        <br/>
+        <button type="submit" class="btn btn-success" [disabled]="f.invalid">Create an account</button>
+    </form>
+</div>
+<div class="alert alert-danger" *ngIf="errMessage">{{errMessage}}</div>

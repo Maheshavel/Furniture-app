@@ -1,0 +1,31 @@
+<br/>
+<table class="table table-striped table-bordered table-primary">
+    <thead class="bg-primary text-white">
+        <td>Product name</td>
+        <td>Product price</td>
+        <td>Product amount</td>
+        <td>Total</td>
+        <td>Options</td>
+    </thead>
+    <tbody>
+         <tr *ngFor="let product of shoppingCart; index as i">
+             <td>{{product.name}}</td>
+             <td>{{product.price | currency: 'RUB': "symbol-narrow": "1.2-2"}}</td>
+             <td>
+                 <input type="number" [(ngModel)]="product.amount" min="0"/>
+             </td>
+             <td>{{product.price * product.amount | currency: 'RUB': "symbol-narrow": "1.2-2"}}</td>
+             <td>
+                 <button class="btn btn-success text-white" style="margin: 7px;" (click)="updateCart(i)">Save changes</button>
+                 <button class="btn btn-secondary" (click)="deleteCart(i)">Delete</button>
+             </td>
+         </tr>
+         <tr>
+             <td class="text-right" colspan="3">Total</td>
+             <td>{{cartPrice | currency: 'RUB': "symbol-narrow": "1.2-2"}}</td>
+             <td>
+                 <button class="btn btn-primary text-white" (click)="sendToOrder()" [disabled]="len === 0">Send to a new order</button>
+            </td>
+         </tr>
+    </tbody>
+</table>
